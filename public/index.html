@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vote Here</title>
+  <script src="vote.js" defer></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="manifest" href="manifest.json" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="reset.css" />
+</head>
+
+<body>
+  <div id="waitScreen" class="visible">
+    <p>Je kan antwoorden zodra de videoclip is afgespeeld...</p>
+  </div>
+
+  <div class="tablet">
+    <!--
+      <div class="show-question">
+        Zou jij jezelf registreren, ook al weet je dat dit je zichtbaar en
+        kwetsbaar maakt?
+      </div>
+    -->
+
+    <div class="btn-container">
+      <div class="vote-btn" id="voteA">Ja</div>
+      <div class="vote-btn" id="voteB">Nee</div>
+    </div>
+  </div>
+</body>
+
+</html>
