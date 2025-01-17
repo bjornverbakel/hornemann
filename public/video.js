@@ -1,7 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const socket = io(); // Connect to the WebSocket
+  const socket = io({ query: { role: "admin" } });
+  const generateRoomBtn = document.getElementById("generateRoomBtn");
+  const roomIdElements = document.querySelectorAll(".roomId");
+  const qrCodeElement = document.getElementById("qrcode");
+
+  const url = "https://hornemann-production.up.railway.app/"
+
+  // Function to generate a unique room ID
+  function generateRoomId() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let roomId = "";
+    for (let i = 0; i < 5; i++) {
+      roomId += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    roomIdElements.forEach((element) => {
+      element.textContent = roomId;
+    });
+    socket.emit("joinRoom", roomId); // Join the room
+
+    // Generate QR code
+    const QrUrl = url + roomId;
+    qrCodeElement.innerHTML = ""; // Clear previous QR code
+    new QRCode(qrCodeElement, QrUrl);
+  }
+
+  generateRoomId();
+
+  // Generate Room ID and display it
+  generateRoomBtn.addEventListener("click", () => {
+    generateRoomId();
+  });
+
   socket.emit("resetVotes");
   socket.emit("toggleVoting", { enabled: false }); // Disable voting
+  socket.emit("requestUserCount"); // Fetch user count when the page is loaded
 
   // DOM Elements
   const startBtn = document.getElementById("startBtn");
@@ -119,16 +151,31 @@ document.addEventListener("DOMContentLoaded", () => {
     videoPlayer.play();
   });
 
+  socket.on("updateUserCount", (userCount) => {
+    // console.log(`Connected users: ${userCount}`);
+    // Update all elements with the class "userCount"
+    document.querySelectorAll(".userCount").forEach((element) => {
+      element.innerText = userCount;
+    });
+  });
+
+  socket.emit("requestUserCount"); // Ensure count is up to date when the page is loaded
+
   // Playing the correct video/question sequence ---------------------------------------
 
   // Display the correct question
   function showQuestion() {
     toggleOverlay(); // Show overlay
     question.classList.add("animateQuestion"); // Trigger the animation
+    question.addEventListener("animationend", () => {
+      document.querySelector(".inform").classList.add("visible");
+    });
   }
 
   function showResults() {
+    document.querySelector(".inform").classList.remove("visible");
     resultsContainer.classList.add("visible");
+    // ...existing code...
 
     // Find all elements with result values
     const resultElements = resultsContainer.querySelectorAll(".result-value");
@@ -137,8 +184,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultA = document.getElementById("countA");
     const resultB = document.getElementById("countB");
 
-    const targetA = parseInt(resultA.dataset.target, 10);
-    const targetB = parseInt(resultB.dataset.target, 10);
+    let targetA = parseInt(resultA.dataset.target, 10);
+    let targetB = parseInt(resultB.dataset.target, 10);
+
+    // Handle 0 votes case by assigning 100% to a random winner and 0% to the loser
+    if (targetA === 0 && targetB === 0) {
+      if (Math.random() < 0.5) {
+        targetA = 100;
+        targetB = 0;
+      } else {
+        targetA = 0;
+        targetB = 100;
+      }
+    }
+    // Handle 50/50 case by assigning 51% to a random winner and 49% to the loser
+    if (targetA === targetB) {
+      if (Math.random() < 0.5) {
+        targetA = 51;
+        targetB = 49;
+      } else {
+        targetA = 49;
+        targetB = 51;
+      }
+    }
 
     // Use setTimeout to ensure the count animation has finished
     setTimeout(() => {
@@ -157,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Proceed to the next video after a short delay
         setTimeout(() => {
-          nextVideo(percentageA, percentageB);
+          nextVideo(targetA, targetB);
 
           resultB.parentNode.classList.remove("fade");
           resultB.style.transform = "scale(0.6)";
@@ -285,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Timer animation should play after that of the question
   question.addEventListener("animationend", () => {
     timerWrapper.classList.add("visible");
-    timer.textContent = questionDuration
+    timer.textContent = questionDuration;
     startCountdown(questionDuration);
   });
 
@@ -370,32 +438,32 @@ document.addEventListener("DOMContentLoaded", () => {
       nextVideoFile = "1.mov";
       currentPath = "1"; // Start the path
       choiceCount++;
-      console.log(`Starting video: ${currentPath}`);
+      // console.log(`Starting video: ${currentPath}`);
     } else if (currentPath === "1") {
       // Second video (1a.mov or 1b.mov)
       nextVideoFile = `1${nextBranch}.mov`;
       currentPath += nextBranch; // Update path with branch
       choiceCount++;
-      console.log(`Second video: ${currentPath}`);
+      // console.log(`Second video: ${currentPath}`);
     } else {
       // Handle subsequent videos dynamically
       currentPath += choiceCount + nextBranch; // Append branch
       choiceCount++;
       nextVideoFile = `${currentPath}.mov`;
-      console.log(`Subsequent video: ${currentPath}`);
+      // console.log(`Subsequent video: ${currentPath}`);
     }
 
     // Handle path merging (e.g., 1a2b and 1b2a merging into 1a2a)
     if (currentPath === "1a2b" || currentPath === "1b2a") {
       currentPath = "1a2a"; // Merge paths into 1a2a
-      console.log(`Merged path into: ${currentPath}`);
+      // console.log(`Merged path into: ${currentPath}`);
     }
 
     // Handle specific redirect for 1b2b3b4a to 1b2b3a4b
     if (currentPath === "1b2b3b4a") {
       currentPath = "1b2b3a4b";
       nextVideoFile = `${currentPath}.mov`;
-      console.log(`Redirected path to: ${currentPath}`);
+      // console.log(`Redirected path to: ${currentPath}`);
     }
 
     // Check if the next video exists

@@ -9,23 +9,53 @@
   <script src="/socket.io/socket.io.js"></script>
   <link rel="manifest" href="manifest.json" />
 
-  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!--FontAwesome icons-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
+    integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body>
-  <div id="waitScreen" class="visible">
-    <p>Je kan antwoorden zodra de videoclip is afgespeeld...</p>
-  </div>
+<body id="votingScreen">
+  <header>
+    <div class="room-display">
+      ID: <span id="roomId"></span>
+    </div>
+    <div id="leaveRoomBtn">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+    </div>
+  </header>
 
   <div class="tablet">
-    <!--
-      <div class="show-question">
-        Zou jij jezelf registreren, ook al weet je dat dit je zichtbaar en
-        kwetsbaar maakt?
-      </div>
-    -->
+    <div id="startScreen" class="visible">
+      
+      <div class="room-container">
+        <p>Voer je game ID in</p>
+        <div id="roomIdInput">
+          <input placeholder="_" type="text" />
+          <input placeholder="_" type="text" />
+          <input placeholder="_" type="text" />
+          <input placeholder="_" type="text" />
+          <input placeholder="_" type="text" />
+        </div>
 
+        <button id="submit">Deelnemen</button>
+
+        <div id="errorMessage" class="error-message"></div>
+      </div>
+    </div>
+
+    <div id="waitScreen">
+      <p>Je kan antwoorden zodra de videoclip is afgespeeld...</p>
+    </div>
+
+    <!--
+    <div class="show-question">
+      De meest gekozen optie zal bepalen welke actie genomen wordt.
+    </div>
+-->
     <div class="btn-container">
       <div class="vote-btn" id="voteA">Ja</div>
       <div class="vote-btn" id="voteB">Nee</div>

@@ -13,7 +13,9 @@
 
 ## About
 
-- This project servers to aid and attract customers to Het Hornemannhuis in Eindhoven, The Netherlands. It's ment to let users experrience what Jews had to go through in that time. Through dilemmas it hopes to motivate users to think about their choices, since it directly reflects the consequenses.
+- This project servers to aid and attract customers to Het Hornemannhuis in Eindhoven, The Netherlands.
+  It's ment to let users experrience what Jews had to go through in that time. Through dilemmas it hopes to motivate users to think about their choices,
+  since it directly reflects the consequenses.
 - Children tend to enjoy learning through interactivity. So instead of only reading, they can now click through, and lead their own story.
 
 ---
@@ -33,7 +35,7 @@
 
 - INSTALL [NODE](https://nodejs.org/en)
 - npm install socket.io@latest socket.io-client@latest express@latest sqlite3@latest
-- Host site locally via URL provider [ngrok](https://ngrok.com/):
+- Host site LOCALLY via URL provider [ngrok](https://ngrok.com/):
   choco install ngrok
   ngrok config add-authtoken <token>
   ngrok http 3000
@@ -50,6 +52,10 @@
 - app.js handles server side functioning
 - db.js sends data to sqlite3 db. ====== Not updated
 
+- VISIT ONLINE
+- Go to https://hornemann-production.up.railway.app/videoscreen.html for the videoscreen (output device).
+- Go to https://hornemann-production.up.railway.app/ for the voting screen (input device). Go to earlier mention QR-code generator to generate a QR-code for the link.
+
 ## Roadmap
 
 - Adding multiple languages for audience
@@ -59,7 +65,7 @@
 
 ## Contributing
 
-11/12/2024 (dd/mm/yyyy) Contribution has stopped.
+11/12/2024 (dd/mm/yyyy) Contribution has slowed down a bit due to holidays but will pick back up in 2025!
 
 ## Authors
 

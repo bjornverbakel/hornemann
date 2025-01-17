@@ -11,23 +11,42 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="reset.css" />
 
+  <!--QR code generator library-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
   <!--FontAwesome icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
     integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body>
+<body id="videoScreen">
   <div id="startScreen" class="visible">
-    <img src="assets/img/logo.png" alt="">
-    <h1>Begin de interactieve video!</h1>
-    <div id="startBtn">Start</div>
+
+    <div class="room-container">
+      <p>Game ID</p>
+      <div>
+        <span class="roomId"></span>
+        <span id="generateRoomBtn"><i class="fa-solid fa-arrows-rotate"></i></span>
+      </div>
+    </div>
+
+
+    <div class="start-images">
+      <img class="logo" src="assets/img/logo.png" alt="">
+      <div id="qrcode"></div>
+    </div>
+
+    <p><i class="fa-solid fa-users"></i> <span class="userCount">0</span> deelnemers</p>
+
+    <button id="startBtn">Start de video!</button>
+
   </div>
 
   <div id="endingScreen" class="">
-    <img src="assets/img/logo.png" alt="">
+    <img class="logo" src="assets/img/logo.png" alt="">
     <h1>Bedankt voor je deelname!</h1>
-    <div id="restartBtn">Opnieuw spelen</div>
+    <button id="restartBtn">Opnieuw spelen</button>
   </div>
 
   <div class="video-controls">
@@ -35,22 +54,26 @@
       <div id="progress"></div>
     </div>
 
-    <div class="btns">
-      <div class="control-btn"><i class="fa-solid fa-pause fa-xl"></i></div>
-      <div class="control-btn"><i class="fa-solid fa-forward fa-xl"></i></div>
-      <div class="control-btn"><i class="fa-solid fa-repeat fa-xl"></i></div>
+    <div class="toolbar">
+      <div class="btns">
+        <div class="control-btn"><i class="fa-solid fa-pause fa-xl"></i></div>
+        <div class="control-btn"><i class="fa-solid fa-forward fa-xl"></i></div>
+        <div class="control-btn"><i class="fa-solid fa-repeat fa-xl"></i></div>
+      </div>
+      <span class="roomId">dawdsawd</span>
+      <p class="users"><i class="fa-solid fa-users fa-xl"></i><span class="userCount">0</span></p>
     </div>
   </div>
 
-  <div class="video-container">
-    <video id="videoPlayer">
+  <div class="video-container" background-color="black">
+    <video id="videoPlayer" preload="auto" background-color="black">
       <source id="videoSource" src="assets/vid/1.mov" type="video/mov" />
       Your browser does not support the video tag.
     </video>
 
     <div id="overlay">
       <div class="question">Zou je jezelf registreren?</div>
-
+      <div class="inform">Het meest gekozen antwoord bepaalt de volgende actie.</div>
       <div class="timer-wrapper">
         <svg class="progress-ring" width="120" height="120">
           <circle class="progress-ring__circle" cx="60" cy="60" r="54" />
