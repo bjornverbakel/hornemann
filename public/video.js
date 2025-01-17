@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     socket.emit("joinRoom", roomId); // Join the room
 
     // Generate QR code
-    const QrUrl = url + roomId;
+    const QrUrl = url + "?roomId=" + roomId;
     qrCodeElement.innerHTML = ""; // Clear previous QR code
     new QRCode(qrCodeElement, QrUrl);
   }
