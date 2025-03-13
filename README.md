@@ -1,71 +1,33 @@
-# [Het Hornemannhuis](https://hethornemannhuis.nl/)
-
-## Table of Contents
-
-1. [About](#about)
-2. [Installation](#installation)
-3. [Features](#features)
-4. [Contributing](#contributing)
-5. [Authors](#authors)
-6. [License](#license)
-
----
+# [Het Hornemann Huis](https://hethornemannhuis.nl/) Interactive Video
 
 ## About
 
-- This project servers to aid and attract customers to Het Hornemannhuis in Eindhoven, The Netherlands.
-  It's ment to let users experrience what Jews had to go through in that time. Through dilemmas it hopes to motivate users to think about their choices,
-  since it directly reflects the consequenses.
-- Children tend to enjoy learning through interactivity. So instead of only reading, they can now click through, and lead their own story.
-
----
+- This is a choose-your-own-adventure video experience for Het Hornemann Huis, a history museum that tells the tragic story of what the Hornemann family went through during the Second World War.
+- The goal was to get young people more interested in history, and make them think about the dilemma's that people had to face during the war. The product was this interactive experience, where the audience gets presented a story sequence which ends with a dilemma.
+- People can then vote on which choice they would have made with their phones, and see the results of the poll afterwards. The most voted answer decides what the next sequence will be, and what the eventual outcome of the story will be.
 
 ## Installation
 
-### Prerequisites
+1. Clone the repository:
+    ```sh
+    git clone <repository-url>
+    cd hornemannhuis-project
+    ```
 
-- Node.js, Socket.io, Express, Sqlite3 Ngrok NPM
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
 
-### Steps
+3. Run the server:
+    ```sh
+    npm start
+    ```
 
-- cd existing_repo
-- git remote add origin https://git.fhict.nl/I529052/hornemannhuis-project.git
-- git branch -M main
-- git push -uf origin main
+## Usage
 
-- INSTALL [NODE](https://nodejs.org/en)
-- npm install socket.io@latest socket.io-client@latest express@latest sqlite3@latest
-- Host site LOCALLY via URL provider [ngrok](https://ngrok.com/):
-  choco install ngrok
-  ngrok config add-authtoken <token>
-  ngrok http 3000
-- Running application:
-  Terminal: node server/app.js
-  go to http://localhost:3000/videoscreen.html to visit the big screen
-  Open new terminal: ngrok http 3000
-- Paste provided URL in a [QR code generator](https://www.the-qrcode-generator.com/)
-- Let people scan the code to join the experience!
-- Provided URL and QR code are temporary. And shouldn't be used as permanent links.
-
-- video.js serves as the main JS file
-- vote.js handles the visuals and sending of inputs for voting page
-- app.js handles server side functioning
-- db.js sends data to sqlite3 db. ====== Not updated
-
-- VISIT ONLINE
-- Go to https://hornemann-production.up.railway.app/videoscreen.html for the videoscreen (output device).
-- Go to https://hornemann-production.up.railway.app/ for the voting screen (input device). Go to earlier mention QR-code generator to generate a QR-code for the link.
-
-## Roadmap
-
-- Adding multiple languages for audience
-- Reformatting in a framework
-- Adding security features
-- Expanding story
-
-## Contributing
-
-11/12/2024 (dd/mm/yyyy) Contribution has slowed down a bit due to holidays but will pick back up in 2025!
+1. `videoscreen.html` is the main video screen.
+2. `index.html` is the voting screen for participating users.
 
 ## Authors
 
@@ -78,32 +40,30 @@ Media Production:
 
 - Sergio Vizcarra: https://git.fhict.nl/I508616
 
-## License
-
 ### Sounds
 
-Heartbeat Sound Effect by u_9i0vmohuwc from Pixabay
+- Heartbeat Sound Effect by u_9i0vmohuwc from Pixabay
 
-Train tracks Sound Effect by kokoreli777 from Pixabay
+- Train tracks Sound Effect by kokoreli777 from Pixabay
 
-Footsteps Sound Effect by freesound_community from Pixabay
+- Footsteps Sound Effect by freesound_community from Pixabay
 
-Knocking on door Sound Effect by freesound_community from Pixabay
+- Knocking on door Sound Effect by freesound_community from Pixabay
 
-Farm sounds Sound Effect by Justin Callaghan from Pixabay
+- Farm sounds Sound Effect by Justin Callaghan from Pixabay
 
-heavy breathing Sound Effect by freesound_community from Pixabay
+- heavy breathing Sound Effect by freesound_community from Pixabay
 
-Small projector Sound Effect by freesound_community from Pixabay
+- Small projector Sound Effect by freesound_community from Pixabay
 
 ### Images:
 
-https://beeldbankwo2.nl/nl/
+- https://beeldbankwo2.nl/nl/
 
-Julia Taubitz on Unsplash (2 images)
+- Julia Taubitz on Unsplash (2 images)
 
-https://unsplash.com/photos/an-old-brick-building-with-snow-on-the-ground-S4bZY0u2nz8
+- https://unsplash.com/photos/an-old-brick-building-with-snow-on-the-ground-S4bZY0u2nz8
 
-https://unsplash.com/photos/a-narrow-street-with-snow-on-the-ground-cwQbP45LTug
+- https://unsplash.com/photos/a-narrow-street-with-snow-on-the-ground-cwQbP45LTug
 
-[Het Hornemannhuis](https://hethornemannhuis.nl/)
+- [Het Hornemannhuis](https://hethornemannhuis.nl/)
