@@ -10,8 +10,8 @@
 
 1. Clone the repository:
     ```sh
-    git clone <repository-url>
-    cd hornemannhuis-project
+    git clone https://github.com/bjornverbakel/hornemann
+    cd hornemann
     ```
 
 2. Install dependencies:
